@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diágora — Edición y traducción especializada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400..500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --paper:#FBF7F1; --panel:#FFFFFF; --ink:#2A2119; --muted:#7A6E60; --line:#E6DBCB;
+  --wine:#8A3B4A; --wine-hover:#722F3C; --on-wine:#FFF9F5;
+  --sage:#5C7261; --sage-tint:#E7EDE4;
+  --sand:#E4C77A;
+  --a-eli:#8A3B4A; --a-cam:#5C7261; --a-ren:#B0742E;
+  --serif:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#1C1712; --panel:#241D17; --ink:#F3ECE1; --muted:#B7A996; --line:#3B3125;
+    --wine:#D98A96; --wine-hover:#E7A3AD; --on-wine:#1C1712;
+    --sage:#9BB49F; --sage-tint:#26332A;
+    --sand:#E4C77A;
+    --a-eli:#D98A96; --a-cam:#9BB49F; --a-ren:#D9A85C;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#1C1712; --panel:#241D17; --ink:#F3ECE1; --muted:#B7A996; --line:#3B3125;
+  --wine:#D98A96; --wine-hover:#E7A3AD; --on-wine:#1C1712;
+  --sage:#9BB49F; --sage-tint:#26332A;
+  --sand:#E4C77A;
+  --a-eli:#D98A96; --a-cam:#9BB49F; --a-ren:#D9A85C;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 4.5rem);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.6 var(--sans)}
+:focus-visible{outline:2px solid var(--wine);outline-offset:2px}
+.wrap{width:min(1100px,100% - 2.5rem);margin-inline:auto}
+.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:var(--paper);padding:.5rem .9rem;z-index:20}
+.skip:focus{left:.5rem;top:.5rem}
+img,svg{max-width:100%;display:block}
+
+/* Header */
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--paper);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:4rem}
+.brand{display:flex;align-items:baseline;gap:.7rem;text-decoration:none;color:var(--ink)}
+.brand .mark{width:1.9rem;height:1.9rem;flex:none;align-self:center}
+.brand .word{font:italic 500 1.4rem/1 var(--serif);letter-spacing:-.01em}
+.brand .tag{font:500 .78rem var(--sans);font-style:normal;color:var(--muted);letter-spacing:0}
+.nav{display:flex;align-items:center;gap:1.5rem}
+.nav a{color:var(--ink);text-decoration:none;font-weight:500;font-size:.94rem}
+.nav a:hover{color:var(--wine)}
+.lang-btn{font:500 .88rem var(--sans);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:99px;padding:.4rem .85rem;cursor:pointer}
+.lang-btn:hover{border-color:var(--wine);color:var(--wine)}
+
+/* Hero */
+.hero{padding:4rem 0 3.5rem}
+.hero-solo{max-width:44rem}
+.eyebrow{font:500 .95rem var(--sans);color:var(--wine);margin:0 0 1rem}
+h1{font:500 clamp(2.3rem,4.6vw,3.6rem)/1.1 var(--serif);letter-spacing:-.015em;margin:0 0 1.4rem;text-wrap:balance}
+h1 em{font-style:italic;color:var(--wine)}
+.hero-lead{font:400 1.15rem/1.55 var(--sans);color:var(--muted);max-width:32rem;margin:0 0 2rem}
+.hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:1.1rem 1.6rem}
+.btn{display:inline-block;font:600 1rem var(--sans);padding:.8rem 1.4rem;border-radius:99px;background:var(--wine);color:var(--on-wine);border:0;text-decoration:none;cursor:pointer}
+.btn:hover{background:var(--wine-hover)}
+.textlink{font-weight:500;color:var(--ink);text-decoration:underline;text-decoration-color:var(--wine);text-decoration-thickness:2px;text-underline-offset:4px}
+.textlink:hover{color:var(--wine)}
+
+/* Trio portrait cluster */
+.t-eli{background:var(--a-eli)}
+.t-cam{background:var(--a-cam)}
+.t-ren{background:var(--a-ren)}
+
+/* Sections */
+.section{padding:4.5rem 0;border-top:1px solid var(--line)}
+.section-head{max-width:40rem;margin-bottom:2.5rem}
+.k{font:500 .88rem var(--sans);color:var(--wine);display:block;margin-bottom:.7rem}
+h2{font:500 clamp(1.75rem,3.2vw,2.4rem)/1.18 var(--serif);letter-spacing:-.01em;margin:0 0 .85rem;text-wrap:balance}
+.lead{font:400 1.08rem/1.6 var(--sans);color:var(--muted);margin:0;max-width:36rem}
+
+/* Nosotras / founders */
+.founders{display:grid;gap:2.5rem}
+.founder{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr);gap:1.8rem;align-items:start}
+.founder .ring{width:100%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font:italic 500 2.6rem var(--serif);color:var(--on-wine)}
+.founder h3{font:500 1.45rem/1.2 var(--serif);margin:0 0 .2rem}
+.founder .role{font:500 .9rem var(--sans);color:var(--muted);margin:0 0 .9rem}
+.founder p{margin:0 0 .7rem;max-width:36rem}
+.founder p:last-child{margin-bottom:0}
+
+/* Services */
+.svc-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.svc{background:var(--panel);padding:1.8rem 2rem}
+.svc h3{font:500 1.3rem/1.2 var(--serif);margin:0 0 .6rem}
+.svc p{margin:0;color:var(--muted);max-width:46rem}
+.svc-feat{background:var(--sage-tint);position:relative}
+.svc-feat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--sage)}
+.svc-feat h3{color:var(--ink)}
+.svc-feat p{color:var(--ink);opacity:.82}
+
+/* Quote/testimonials */
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.75rem}
+.qcard{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:1.6rem}
+.qcard p.q{font:italic 400 1.12rem/1.55 var(--serif);margin:0 0 1rem}
+.qcard .who{font:500 .85rem var(--sans);color:var(--muted)}
+
+/* Process */
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.75rem}
+.steps li{border-top:2px solid var(--wine);padding-top:.9rem}
+.step-n{display:block;font:500 1.7rem/1 var(--serif);color:var(--wine);margin-bottom:.6rem}
+.steps h3{font:600 1rem/1.3 var(--sans);margin-bottom:.35rem}
+.steps p{margin:0;font-size:.93rem;color:var(--muted)}
+
+/* Band */
+.band{background:var(--ink);color:var(--paper);padding:4.5rem 0}
+.band .section-head h2, .band .k{color:var(--paper)}
+.band .k{color:var(--sand)}
+.keeps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem}
+.keeps p{margin:0;padding-top:1rem;border-top:1px solid rgba(251,247,241,.3);font:400 1.3rem/1.35 var(--serif)}
+
+/* Contact */
+.contact{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:3.5rem;align-items:start}
+.contact-copy p{margin:0 0 1rem;max-width:30rem}
+.mail{font:500 1.1rem var(--sans);color:var(--ink);text-decoration-color:var(--wine);text-decoration-thickness:2px;text-underline-offset:4px}
+.mail:hover{color:var(--wine)}
+.quote-form{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:1.6rem;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem}
+.field{display:grid;gap:.35rem;min-width:0}
+.field.full{grid-column:1 / -1}
+.field label{font:500 .88rem var(--sans)}
+.field input,.field select,.field textarea{font:400 1rem var(--sans);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:.65rem .75rem;width:100%;min-width:0}
+.field textarea{resize:vertical;min-height:6.5rem}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{outline:2px solid var(--wine);outline-offset:1px;border-color:var(--wine)}
+.form-foot{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:1rem}
+.status{font:400 .9rem var(--sans);color:var(--muted);margin:0;min-height:1.4em}
+
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);font-size:.88rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 2rem}
+
+@media (max-width:920px){
+  .contact{grid-template-columns:minmax(0,1fr);gap:2.25rem}
+  .svc-grid,.quotes,.keeps{grid-template-columns:minmax(0,1fr)}
+  .founder{grid-template-columns:96px minmax(0,1fr)}
+}
+@media (max-width:720px){
+  .brand .tag{display:none}
+  .nav a.opt{display:none}
+  .nav{gap:1rem}
+  .hero{padding:2.5rem 0 3rem}
+  .section,.band{padding:3.25rem 0}
+  .quote-form{grid-template-columns:minmax(0,1fr);padding:1.25rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Ir al contenido</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="#top">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="10" cy="16" r="6" fill="var(--a-eli)"/><circle cx="22" cy="16" r="6" fill="var(--a-ren)" fill-opacity=".85"/><circle cx="16" cy="8" r="6" fill="var(--a-cam)" fill-opacity=".85"/></svg>
+      <span class="word">Diágora</span>
+      <span class="tag" data-i18n="brand.tag"></span>
+    </a>
+    <nav class="nav" data-i18n-aria="nav.aria" aria-label="Principal">
+      <a class="opt" href="#nosotras" data-i18n="nav.us"></a>
+      <a class="opt" href="#servicios" data-i18n="nav.services"></a>
+      <a class="opt" href="#opiniones" data-i18n="nav.testimonials"></a>
+      <a href="#contacto" data-i18n="nav.contact"></a>
+      <button class="lang-btn" id="langBtn" type="button"></button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="wrap hero-solo">
+      <span class="eyebrow" data-i18n="hero.eyebrow"></span>
+      <h1 data-i18n-html="hero.h1"></h1>
+      <p class="hero-lead" data-i18n="hero.lead"></p>
+      <div class="hero-actions">
+        <a class="btn" href="#contacto" data-i18n="hero.cta1"></a>
+        <a class="textlink" href="#nosotras" data-i18n="hero.cta2"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOSOTRAS -->
+  <section class="section" id="nosotras">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="k" data-i18n="us.k"></span>
+        <h2 data-i18n="us.h2"></h2>
+        <p class="lead" data-i18n="us.lead"></p>
+      </div>
+      <div class="founders">
+        <article class="founder">
+          <span class="ring t-eli">S</span>
+          <div>
+            <h3>Mtra. Sofía Ortega Calderón</h3>
+            <p class="role" data-i18n="eli.role"></p>
+            <p data-i18n="eli.p1"></p>
+            <p data-i18n="eli.p2"></p>
+          </div>
+        </article>
+        <article class="founder">
+          <span class="ring t-cam">A</span>
+          <div>
+            <h3>Dra. Ana Vieyra</h3>
+            <p class="role" data-i18n="cam.role"></p>
+            <p data-i18n="cam.p1"></p>
+            <p data-i18n="cam.p2"></p>
+          </div>
+        </article>
+        <article class="founder">
+          <span class="ring t-ren">I</span>
+          <div>
+            <h3>Mtra. Itzia Vieyra</h3>
+            <p class="role" data-i18n="ren.role"></p>
+            <p data-i18n="ren.p1"></p>
+            <p data-i18n="ren.p2"></p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="section" id="servicios">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="k" data-i18n="services.k"></span>
+        <h2 data-i18n="services.h2"></h2>
+        <p class="lead" data-i18n="services.lead"></p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc"><h3 data-i18n="s1.t"></h3><p data-i18n="s1.d"></p></div>
+        <div class="svc svc-feat"><h3 data-i18n="s2.t"></h3><p data-i18n="s2.d"></p></div>
+        <div class="svc"><h3 data-i18n="s3.t"></h3><p data-i18n="s3.d"></p></div>
+        <div class="svc"><h3 data-i18n="s4.t"></h3><p data-i18n="s4.d"></p></div>
+        <div class="svc"><h3 data-i18n="s5.t"></h3><p data-i18n="s5.d"></p></div>
+        <div class="svc"><h3 data-i18n="s6.t"></h3><p data-i18n="s6.d"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPINIONES -->
+  <section class="section" id="opiniones">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="k" data-i18n="q.k"></span>
+        <h2 data-i18n="q.h2"></h2>
+      </div>
+      <div class="quotes">
+        <div class="qcard"><p class="q" data-i18n="q1.t"></p><p class="who" data-i18n="q1.w"></p></div>
+        <div class="qcard"><p class="q" data-i18n="q2.t"></p><p class="who" data-i18n="q2.w"></p></div>
+        <div class="qcard"><p class="q" data-i18n="q3.t"></p><p class="who" data-i18n="q3.w"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section class="section" id="proceso">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="k" data-i18n="process.k"></span>
+        <h2 data-i18n="process.h2"></h2>
+      </div>
+      <ol class="steps">
+        <li><span class="step-n">1</span><h3 data-i18n="p1.t"></h3><p data-i18n="p1.d"></p></li>
+        <li><span class="step-n">2</span><h3 data-i18n="p2.t"></h3><p data-i18n="p2.d"></p></li>
+        <li><span class="step-n">3</span><h3 data-i18n="p3.t"></h3><p data-i18n="p3.d"></p></li>
+        <li><span class="step-n">4</span><h3 data-i18n="p4.t"></h3><p data-i18n="p4.d"></p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- LO QUE NO CAMBIAMOS -->
+  <section class="band">
+    <div class="wrap">
+      <span class="k" data-i18n="keep.k"></span>
+      <h2 style="margin-bottom:2.25rem" data-i18n="keep.h2"></h2>
+      <div class="keeps">
+        <p data-i18n="keep1"></p>
+        <p data-i18n="keep2"></p>
+        <p data-i18n="keep3"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="section" id="contacto">
+    <div class="wrap contact">
+      <div class="contact-copy">
+        <span class="k" data-i18n="contact.k"></span>
+        <h2 data-i18n="contact.h2"></h2>
+        <p data-i18n="contact.p1"></p>
+        <p data-i18n="contact.p2"></p>
+        <p><a class="mail" href="mailto:hola@diagora.example">hola@diagora.example</a></p>
+      </div>
+
+      <form class="quote-form" id="quote" novalidate>
+        <div class="field">
+          <label for="f-name" data-i18n="f.name"></label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-email" data-i18n="f.email"></label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="f-service" data-i18n="f.service"></label>
+          <select id="f-service" name="service">
+            <option value="tr" data-i18n="o.tr"></option>
+            <option value="ed" data-i18n="o.ed"></option>
+            <option value="crit" data-i18n="o.crit"></option>
+            <option value="policy" data-i18n="o.policy"></option>
+            <option value="paleo" data-i18n="o.paleo"></option>
+            <option value="coh" data-i18n="o.coh"></option>
+            <option value="unsure" data-i18n="o.unsure"></option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-lang" data-i18n="f.lang"></label>
+          <select id="f-lang" name="lang">
+            <option value="en" data-i18n="o.en"></option>
+            <option value="es" data-i18n="o.es"></option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="f-msg" data-i18n="f.msg"></label>
+          <textarea id="f-msg" name="msg" data-i18n-ph="f.ph"></textarea>
+        </div>
+        <div class="form-foot">
+          <button class="btn" type="submit" data-i18n="f.submit"></button>
+          <p class="status" id="formStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span data-i18n="foot.l"></span>
+    <span data-i18n="foot.r"></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var $ = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  var I18N = {
+    es: {
+      'meta.title': 'Diágora — Edición y traducción especializada',
+      'skip': 'Ir al contenido',
+      'brand.tag': 'Edición y traducción especializada',
+      'nav.aria': 'Navegación principal',
+      'nav.us': 'Nosotras', 'nav.services': 'Servicios', 'nav.testimonials': 'Opiniones', 'nav.contact': 'Contacto',
+      'lang.btn': 'English', 'lang.aria': 'Cambiar el idioma del sitio a inglés',
+      'hero.eyebrow': 'Traducción, edición y asesoría académica en dos idiomas',
+      'hero.h1': 'La precisión que <em>tu investigación</em> necesita.',
+      'hero.lead': 'Somos un equipo compuesto por tres mexicanas con trayectoria académica internacional, con experiencia en traducción, corrección de estilo, cuidado del aparato crítico y asesoría metodológica, para textos de humanidades y ciencias sociales en general, con el rigor que exige el arbitraje académico.',
+      'hero.cta1': 'Cuéntanos sobre tu artículo',
+      'hero.cta2': 'Conócenos',
+      'us.k': 'Quiénes somos',
+      'us.h2': 'Tres lectoras antes que traductoras',
+      'us.lead': 'Fundamos esta página porque sabíamos exactamente qué tipo de ayuda hubiéramos querido recibir.',
+      'eli.role': 'Ciencias sociales y políticas públicas · Traducción, edición y asesoría institucional',
+      'eli.p1': 'Maestra en Gobierno y Asuntos Públicos por FLACSO México, con diplomados en Traducción Especializada (ENALLT-UNAM) y Estudios de Género (CIEG-UNAM), y licenciatura en Filosofía por la UNAM. Su trabajo combina un riguroso perfil metodológico para el análisis cualitativo y cuantitativo con la precisión sintáctica y la solidez terminológica que requieren los textos gubernamentales, sociales e internacionales.',
+      'eli.p2': 'Ha sido investigadora en ciencias sociales y políticas públicas, enfocada en análisis de datos, revisión bibliográfica y elaboración de reportes ejecutivos; coordinadora de proyectos culturales internacionales y gestión presupuestal; y traductora de comunicaciones corporativas e interinstitucionales. Habla español (nativo), inglés (bilingüe) y japonés (intermedio).',
+      'cam.role': 'Filosofía y lógica · Edición y traducción para arbitraje académico',
+      'cam.p1': 'Doctora y maestra en Filosofía, y licenciada en Filosofía por la UNAM. Su trabajo se enfoca en desentrañar estructuras argumentativas complejas y en traducir o editar artículos de investigación y manuscritos teóricos en filosofía, con la precisión terminológica y la adecuación al estilo editorial que exigen las revistas indexadas.',
+      'cam.p2': 'Ha sido investigadora y docente universitaria, y es autora publicada en revistas filosóficas internacionales y dictaminadora de artículos científicos. Habla español (nativo), inglés (fluido), alemán (C1) y francés (B1).',
+      'ren.role': 'Historia del arte y cultura visual · Traducción inglés → español y corrección de estilo',
+      'ren.p1': 'Maestra y licenciada en Historia del Arte por la UNAM. Su trabajo se centra en la edición y revisión de artículos académicos, ensayos y tesis de alta densidad conceptual en historia, teoría del arte y cultura visual, con especial cuidado del aparato crítico —citas, referencias y notas a pie— y en paleografía y transcripción de documentos históricos.',
+      'ren.p2': 'Ha sido docente en la UNAM en teoría e historia de la imagen e iconografía, y evaluadora de textos académicos. Es traductora publicada en revistas especializadas de filosofía y cultura, y correctora de estilo para proyectos editoriales e institucionales de investigación (PAPIIT). Habla español (nativo), inglés (C1, TOEFL ITP 667) y francés (comprensión lectora B1).',
+      'services.k': 'En qué nos especializamos',
+      'services.h2': 'Servicios',
+      'services.lead': 'Servicios que combinamos según en qué etapa esté tu texto, tu investigación o tu programa.',
+      's1.t': 'Traducción especializada (inglés ↔ español)',
+      's1.d': 'Traducción de artículos de investigación, ensayos teóricos, capítulos de libros e informes institucionales. Nos enfocamos en preservar la fidelidad conceptual, la terminología técnica y la arquitectura argumentativa de textos complejos de humanidades y ciencias sociales.',
+      's2.t': 'Corrección de estilo y edición académica',
+      's2.d': 'Revisión sintáctica, gramatical, ortotipográfica y estilística para manuscritos en inglés o español. Pulimos la fluidez y cohesión del texto sin alterar la voz ni la intención de quien escribe, garantizando el tono formal que exigen los comités editoriales y las revistas especializadas.',
+      's3.t': 'Cuidado del aparato crítico y adecuación editorial',
+      's3.d': 'Revisión exhaustiva de citas, notas a pie de página y referencias bibliográficas. Adaptamos el formato y estilo del documento a las normas editoriales específicas de la revista, editorial o institución a la que se someterá el trabajo.',
+      's4.t': 'Asesoría y estructuración de programas sociales y políticas públicas',
+      's4.d': 'Acompañamiento metodológico para la formulación y estructuración de proyectos sociales y de política pública. Colaboramos en la elaboración de diagnósticos, la delimitación clara del problema público, la definición de la población objetivo y el diseño conceptual de programas e informes de impacto.',
+      's5.t': 'Paleografía y transcripción de documentos históricos',
+      's5.d': 'Lectura, transcripción y edición crítica de fuentes documentales manuscritas e impresas antiguas. Ofrecemos un trabajo especializado de interpretación y sistematización de archivos históricos para proyectos de investigación humanística, editorial o institucional.',
+      's6.t': 'Revisión de coherencia argumentativa (opcional)',
+      's6.d': 'Un servicio adicional para quien lo solicite: una lectura de fondo, no solo de forma, que señala dónde el argumento se pierde, se repite o da un salto que el lector no puede seguir, con sugerencias sobre cómo reordenar párrafos o reforzar transiciones.',
+      'q.k': 'Lo que dicen',
+      'q.h2': 'Investigadoras que ya trabajaron con nosotras',
+      'q1.t': '“Tradujeron mi tesis sin que perdiera mi manera de argumentar. Los evaluadores no notaron que el texto había cambiado de idioma.”',
+      'q1.w': 'Investigadora en estudios de género, UAM',
+      'q2.t': '“La corrección vino con notas que me explicaban cada decisión. Aprendí más sobre mi propio inglés académico que en cualquier curso.”',
+      'q2.w': 'Doctorando en sociología, El Colegio de México',
+      'q3.t': '“Cumplieron el plazo con una revista que no da prórrogas, y el manuscrito entró a revisión sin observaciones de forma.”',
+      'q3.w': 'Profesora de historia del arte, Universidad Iberoamericana',
+      'process.k': 'Cómo trabajamos',
+      'process.h2': 'De tu borrador a la entrega',
+      'p1.t': 'Nos escribes', 'p1.d': 'Nos mandas el texto completo o un fragmento representativo para que veamos el estado del inglés o la complejidad de la traducción.',
+      'p2.t': 'Presupuesto y hoja de estilo', 'p2.d': 'Precio cerrado, fecha de entrega y acuerdo sobre terminología antes de empezar.',
+      'p3.t': 'Traducción y segunda lectura', 'p3.d': 'Una de nosotras traduce o corrige; otra revisa coherencia, erratas y citas.',
+      'p4.t': 'Entrega y seguimiento', 'p4.d': 'Recibes el archivo con cambios visibles y dos semanas para dudas o comentarios de evaluadores.',
+      'keep.k': 'Nuestro compromiso',
+      'keep.h2': 'Lo que no cambiamos',
+      'keep1': 'Tu argumento y tu tesis.',
+      'keep2': 'Tu vocabulario técnico, salvo que sea incorrecto o inconsistente.',
+      'keep3': 'La voz de tu disciplina: un ensayo de historia del arte no suena como un artículo de sociología.',
+      'contact.k': 'Escríbenos',
+      'contact.h2': 'Cuéntanos sobre tu artículo',
+      'contact.p1': 'Mándanos un fragmento representativo y el contexto de tu publicación. Te respondemos con un presupuesto y una fecha de entrega.',
+      'contact.p2': 'Firmamos un acuerdo de confidencialidad si tu texto es inédito o delicado.',
+      'f.name': 'Nombre', 'f.email': 'Correo electrónico', 'f.service': 'Servicio', 'f.lang': 'Idioma del texto original',
+      'f.msg': 'Cuéntanos sobre el texto', 'f.ph': 'Disciplina, tipo de texto, revista o editorial de destino…',
+      'o.tr': 'Traducción especializada', 'o.ed': 'Corrección de estilo y edición', 'o.crit': 'Aparato crítico y adecuación editorial', 'o.policy': 'Programas sociales y política pública', 'o.paleo': 'Paleografía y transcripción', 'o.coh': 'Coherencia argumentativa (opcional)', 'o.unsure': 'Aún no lo sé',
+      'o.en': 'Inglés', 'o.es': 'Español',
+      'f.submit': 'Enviar solicitud',
+      'f.invalid': 'Completa tu nombre y un correo válido.',
+      'f.status': 'Se abrió tu programa de correo. Si no ocurrió, escribe a hola@diagora.example.',
+      'mail.subject': 'Solicitud de cotización',
+      'foot.l': '© 2026 Diágora',
+      'foot.r': 'Traducción, edición y asesoría académica en filosofía, arte y política pública.'
+    },
+    en: {
+      'meta.title': 'Diágora — Specialized editing and translation',
+      'skip': 'Skip to content',
+      'brand.tag': 'Specialized editing and translation',
+      'nav.aria': 'Main navigation',
+      'nav.us': 'About us', 'nav.services': 'Services', 'nav.testimonials': 'What people say', 'nav.contact': 'Contact',
+      'lang.btn': 'Español', 'lang.aria': 'Switch the site language to Spanish',
+      'hero.eyebrow': 'Academic translation, editing and advising, in two languages',
+      'hero.h1': 'The precision your <em>research</em> needs.',
+      'hero.lead': 'We’re a team of three Mexican women with international academic backgrounds, experienced in translation, copy editing, critical apparatus and methodological advising, for texts in the humanities and social sciences broadly, with the rigor that peer review demands.',
+      'hero.cta1': 'Tell us about your article',
+      'hero.cta2': 'Meet us',
+      'us.k': 'Who we are',
+      'us.h2': 'Readers first, translators second',
+      'us.lead': 'We started this page because we knew exactly what kind of help we’d wanted to receive.',
+      'eli.role': 'Social sciences and public policy · Translation, editing and institutional advising',
+      'eli.p1': 'MA in Government and Public Affairs from FLACSO México, with diplomas in Specialized Translation (ENALLT-UNAM) and Gender Studies (CIEG-UNAM), and a BA in Philosophy from UNAM. Her work combines a rigorous methodological profile for qualitative and quantitative analysis with the syntactic precision and terminological soundness that government, social and international texts require.',
+      'eli.p2': 'She has worked as a social science and public policy researcher focused on data analysis, literature review and executive reporting; as a coordinator of international cultural projects and budget management; and as a translator of corporate and inter-institutional communications. She speaks Spanish (native), English (bilingual) and Japanese (intermediate).',
+      'cam.role': 'Philosophy and logic · Editing and translation for peer-reviewed publication',
+      'cam.p1': 'PhD and MA in Philosophy, and a BA in Philosophy from UNAM. Her work focuses on untangling complex argumentative structures and translating or editing research articles and theoretical manuscripts in philosophy, with the terminological precision and editorial fit that indexed journals require.',
+      'cam.p2': 'She has worked as a researcher and university lecturer, and is a published author in international philosophy journals and a peer reviewer for scientific articles. She speaks Spanish (native), English (fluent), German (C1) and French (B1).',
+      'ren.role': 'Art history and visual culture · English-to-Spanish translation and copy editing',
+      'ren.p1': 'MA and BA in Art History from UNAM. Her work centers on editing and reviewing academic articles, essays and theses of high conceptual density in art history, art theory and visual culture, with close attention to the critical apparatus — citations, references and footnotes — and to the paleography and transcription of historical documents.',
+      'ren.p2': 'She has taught image theory, art history and iconography at UNAM, and evaluated academic texts. She is a published translator in specialized philosophy and culture journals, and a copy editor for editorial and institutional research projects (PAPIIT). She speaks Spanish (native), English (C1, TOEFL ITP 667) and French (reading comprehension B1).',
+      'services.k': 'What we specialize in',
+      'services.h2': 'Services',
+      'services.lead': 'Services combined depending on where your text, your research, or your program stands.',
+      's1.t': 'Specialized translation (English ↔ Spanish)',
+      's1.d': 'Translation of research articles, theoretical essays, book chapters and institutional reports. We focus on preserving conceptual fidelity, technical terminology and the argumentative structure of complex texts in the humanities and social sciences.',
+      's2.t': 'Copy editing and academic editing',
+      's2.d': 'Syntactic, grammatical, orthotypographic and stylistic review for manuscripts in English or Spanish. We polish the text’s flow and cohesion without altering the author’s voice or intent, ensuring the formal tone editorial boards and specialized journals require.',
+      's3.t': 'Critical apparatus and editorial compliance',
+      's3.d': 'Thorough review of citations, footnotes and bibliographic references. We adapt the document’s format and style to the specific editorial guidelines of the journal, press or institution the work will be submitted to.',
+      's4.t': 'Advising on social programs and public policy',
+      's4.d': 'Methodological support for formulating and structuring social and public policy projects. We help build diagnostics, clearly define the public problem, identify the target population, and design programs and impact reports.',
+      's5.t': 'Paleography and transcription of historical documents',
+      's5.d': 'Reading, transcription and critical editing of old manuscript and printed documentary sources. We offer specialized interpretation and systematization of historical archives for humanistic, editorial or institutional research projects.',
+      's6.t': 'Argumentative coherence review (optional)',
+      's6.d': 'An add-on for those who request it: a read for substance, not just sentences, flagging where the argument loses the thread, repeats itself, or jumps in a way the reader can’t follow, with suggestions for reordering paragraphs or strengthening transitions.',
+      'q.k': 'What people say',
+      'q.h2': 'Researchers who’ve worked with us',
+      'q1.t': '“They translated my thesis without losing how I argue. The committee never noticed the text had changed languages.”',
+      'q1.w': 'Gender studies researcher, UAM',
+      'q2.t': '“The edit came with notes explaining every decision. I learned more about my own academic English than in any course.”',
+      'q2.w': 'Sociology PhD candidate, El Colegio de México',
+      'q3.t': '“They hit a deadline with a journal that gives no extensions, and the manuscript went to review with no formal objections.”',
+      'q3.w': 'Art history professor, Universidad Iberoamericana',
+      'process.k': 'How we work',
+      'process.h2': 'From your draft to delivery',
+      'p1.t': 'You write to us', 'p1.d': 'Send the full text or a representative excerpt, so we can see where the English stands or how complex the translation is.',
+      'p2.t': 'Quote and style sheet', 'p2.d': 'A fixed price, a delivery date, and agreement on terminology before we start.',
+      'p3.t': 'Translation and second read', 'p3.d': 'One of us translates or edits; another checks consistency, typos and citations.',
+      'p4.t': 'Delivery and follow-up', 'p4.d': 'You get the file with visible changes and two weeks for questions or reviewer comments.',
+      'keep.k': 'Our commitment',
+      'keep.h2': 'What we leave alone',
+      'keep1': 'Your argument and your thesis.',
+      'keep2': 'Your technical vocabulary, unless it is incorrect or inconsistent.',
+      'keep3': 'The voice of your discipline: an art history essay should not sound like a sociology article.',
+      'contact.k': 'Get in touch',
+      'contact.h2': 'Tell us about your article',
+      'contact.p1': 'Send us a representative excerpt and some context about where it’s headed. We’ll get back to you with a quote and a delivery date.',
+      'contact.p2': 'We sign a confidentiality agreement if your text is unpublished or sensitive.',
+      'f.name': 'Name', 'f.email': 'Email', 'f.service': 'Service', 'f.lang': 'Language of the original text',
+      'f.msg': 'Tell us about the text', 'f.ph': 'Discipline, type of text, target journal or press…',
+      'o.tr': 'Specialized translation', 'o.ed': 'Copy editing', 'o.crit': 'Critical apparatus and editorial compliance', 'o.policy': 'Social programs and public policy', 'o.paleo': 'Paleography and transcription', 'o.coh': 'Argumentative coherence (optional)', 'o.unsure': 'Not sure yet',
+      'o.en': 'English', 'o.es': 'Spanish',
+      'f.submit': 'Send request',
+      'f.invalid': 'Enter your name and a valid email.',
+      'f.status': 'Your email app should have opened. If it did not, write to diagoraeds@proton.me.',
+      'mail.subject': 'Quote request',
+      'foot.l': '© 2026 Diágora.',
+      'foot.r': 'Academic translation, editing and advising in philosophy, art and public policy.'
+    }
+  };
+
+  var lang = 'es';
+  var navLang = (navigator.language || '').toLowerCase();
+  if (navLang.indexOf('en') === 0) lang = 'en';
+  try {
+    var saved = localStorage.getItem('diagora-lang');
+    if (saved === 'es' || saved === 'en') lang = saved;
+  } catch (e) {}
+
+  function t(k){ var d = I18N[lang]; return d[k] !== undefined ? d[k] : k; }
+
+  function applyLang(){
+    document.documentElement.lang = lang;
+    document.title = t('meta.title');
+    $$('[data-i18n]').forEach(function(e){ e.textContent = t(e.dataset.i18n); });
+    $$('[data-i18n-html]').forEach(function(e){ e.innerHTML = t(e.dataset.i18nHtml); });
+    $$('[data-i18n-ph]').forEach(function(e){ e.placeholder = t(e.dataset.i18nPh); });
+    $$('[data-i18n-aria]').forEach(function(e){ e.setAttribute('aria-label', t(e.dataset.i18nAria)); });
+    var lb = $('#langBtn');
+    lb.textContent = t('lang.btn');
+    lb.setAttribute('aria-label', t('lang.aria'));
+    lb.lang = lang === 'es' ? 'en' : 'es';
+    try { localStorage.setItem('diagora-lang', lang); } catch (e) {}
+  }
+
+  $('#langBtn').addEventListener('click', function(){ lang = lang === 'es' ? 'en' : 'es'; applyLang(); });
+  applyLang();
+
+  var form = $('#quote');
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var status = $('#formStatus');
+    var name = form.elements.name.value.trim();
+    var email = form.elements.email.value.trim();
+    if (!name || !form.elements.email.checkValidity() || !email) {
+      status.textContent = t('f.invalid');
+      (name ? form.elements.email : form.elements.name).focus();
+      return;
+    }
+    var opt = function(n){ return form.elements[n].selectedOptions[0].textContent; };
+    var body = [
+      t('f.name') + ': ' + name,
+      t('f.email') + ': ' + email,
+      t('f.service') + ': ' + opt('service'),
+      t('f.lang') + ': ' + opt('lang'),
+      '',
+      form.elements.msg.value.trim()
+    ].join('\n');
+    status.textContent = t('f.status');
+    window.location.href = 'mailto:diagoraeds@proton.me?subject=' + encodeURIComponent(t('mail.subject')) + '&body=' + encodeURIComponent(body);
+  });
+})();
+</script>
+</body>
+</html>
